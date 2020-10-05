@@ -65,7 +65,7 @@ def minimizator(pdka):
         i += 1
 
     result_division = v_class[-1]
-    for vertex in result_division: # delete copies "from"
+    for vertex in result_division:  # delete copies "from"
         if vertex != min(result_division[vertex]):
             pdka.terminal_vertexes.discard(vertex)
             del pdka.edges[vertex]
@@ -78,7 +78,14 @@ def minimizator(pdka):
 
     pdka.vertexes_number = len(pdka.edges)
 
-    pdka.pretty_print()
+    # pdka.pretty_print()
+
+    """
+    print("pdkator.GoodNKA(", end='')
+    print(pdka.vertexes_number, pdka.start_vertex, pdka.terminal_vertexes, pdka.edges, pdka.alphabet, sep=', ', end='')
+    print(")")
+    """
+
     return pdka
 
 
@@ -93,7 +100,15 @@ def pdkator(dka):
     if is_changed:
         dka.vertexes_number += 1
         dka.edges["dummy"] = dict([(letter, VertexFrozenset({"dummy"})) for letter in dka.alphabet])
-    dka.pretty_print()
+
+    # dka.pretty_print()
+
+    """
+    print("pdkator.GoodNKA(", end='')
+    print(dka.vertexes_number, dka.start_vertex, dka.terminal_vertexes, dka.edges, dka.alphabet, sep=', ', end='')
+    print(")")
+    """
+
     return dka
 
 
@@ -118,15 +133,23 @@ def dkator(good_nka):
 
             if destination_vertex not in dka_edges:
                 queue_v.put(destination_vertex)
-    # print(dka_edges)
-    # print(dka_terminal_vertexes)
-    GoodNKA(len(dka_edges), VertexFrozenset({good_nka.start_vertex}), dka_terminal_vertexes, dka_edges,
-            good_nka.edges).pretty_print()
+
+    # GoodNKA(len(dka_edges), VertexFrozenset({good_nka.start_vertex}), dka_terminal_vertexes, dka_edges, good_nka.edges).pretty_print()
+
+    """
+    print("pdkator.GoodNKA(", end='')
+    print(len(dka_edges), VertexFrozenset({good_nka.start_vertex}), dka_terminal_vertexes, dka_edges,
+                   good_nka.alphabet, sep=', ', end='')
+    print(")")
+    """
+
     return GoodNKA(len(dka_edges), VertexFrozenset({good_nka.start_vertex}), dka_terminal_vertexes, dka_edges,
                    good_nka.alphabet)
 
 
 def read(file=None):
+    tmp_stdin = sys.stdin
+    tmp_stdout = sys.stdout
     if file is not None:
         fd = open(file, 'r')
         fo = open('/dev/null', 'w')
@@ -145,26 +168,24 @@ def read(file=None):
         to_v = int(to_v)
         edges[from_v][letter_v].add(to_v)
 
-    if file is not None:
+    if file != None:
+        print("heyhey")
         sys.stdin.close()
         sys.stdout.close()
-        sys.stdin = sys.__stdin__  # Reset the stdin to its default value
-        sys.stdout = sys.__stdout__
+        sys.stdin = tmp_stdin  # Reset the stdin to its default value
+        sys.stdout = tmp_stdout
 
-    """print(start_vertex)
-    print(terminal_vertexes)
-    print(edges)
-    print(alphabet)
-    # print(frozenset([1, 2, 3, 4]))
-    print(VertexFrozenset(set.union(*[{0, 1}, {1, 2}])))"""
+    # GoodNKA(vertexes_number, start_vertex, terminal_vertexes, edges, alphabet).pretty_print()
 
-    GoodNKA(vertexes_number, start_vertex, terminal_vertexes, edges, alphabet).pretty_print()
-
-    # pdkator(GoodNKA(vertexes_number, start_vertex, terminal_vertexes, edges, alphabet)).pretty_print()
+    """
+    print("pdkator.GoodNKA(", end='')
+    print(vertexes_number, start_vertex, terminal_vertexes, edges, alphabet, sep=', ', end='')
+    print(")")
+    """
 
     return GoodNKA(vertexes_number, start_vertex, terminal_vertexes, edges,
                    alphabet)  # information about size we can get by len
 
 
 if __name__ == "__main__":
-    minimizator(pdkator(dkator(read("tests/expo_test.txt"))))
+    minimizator(pdkator(dkator(read("tests/test2.txt")))).pretty_print()
