@@ -52,7 +52,7 @@ dummy -b-> 'dummy'
 ## Tests
 To run tests:
 ```shell script
-python3 unit_tests.py
+python3 tests.py
 ```
 
 ## Coverage
