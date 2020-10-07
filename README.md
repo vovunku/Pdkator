@@ -9,7 +9,7 @@ Tool for converting nondeterministic finite automaton with one letter transition
 ## How to use?
 Just run main.py in interactive way or with input file. For example:
 ```shell script
-cat tests/test2.txt | python3 pdkator.py > result.txt
+cat tests/test2.txt | python3 pdkator.py
 ```
 or for interactive just
 ```shell script
@@ -24,19 +24,19 @@ Terminal vertexes: {{3, 5}, {3, 4, 5}, {5}}
 Edges: format from -letter-> to1 | to2 ...
 ----------
 {1} -a-> {3}
-{1} -b-> 'dummy'
+{1} -b-> {11}
 ----------
 {3} -a-> {4}
 {3} -b-> {5}
 ----------
-{4} -a-> 'dummy'
+{4} -a-> {11}
 {4} -b-> {3}
 ----------
 {3, 5} -a-> {3, 4, 5}
 {3, 5} -b-> {5}
 ----------
 {6} -a-> {5}
-{6} -b-> 'dummy'
+{6} -b-> {11}
 ----------
 {3, 4, 5} -a-> {3, 4, 5}
 {3, 4, 5} -b-> {3, 5}
@@ -44,8 +44,8 @@ Edges: format from -letter-> to1 | to2 ...
 {5} -a-> {3, 5}
 {5} -b-> {6}
 ----------
-dummy -a-> 'dummy'
-dummy -b-> 'dummy'
+{11} -a-> {11}
+{11} -b-> {11}
 ********************
 ```
 

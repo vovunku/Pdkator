@@ -188,4 +188,4 @@ def read(file=None):
 
 
 if __name__ == "__main__":
-    minimizator(pdkator(dkator(read()))).pretty_print()
+    minimizator(pdkator(dkator(read("tests/test2.txt")))).pretty_print()
