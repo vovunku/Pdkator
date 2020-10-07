@@ -1,4 +1,3 @@
-import fileinput
 import sys
 from queue import Queue
 
@@ -22,14 +21,14 @@ class GoodNKA:  # one letter transitions, no epsilons
 
     def pretty_print(self):
         print("********************")
-        print(f"Total {self.vertexes_number} vertexes")
-        print(f"Start vertex is - {self.start_vertex}")
+        print("Total {} vertexes".format(self.vertexes_number))
+        print("Start vertex is - {}".format(self.start_vertex))
         print("Terminal vertexes:", self.terminal_vertexes)
         print("Edges: format from -letter-> to1 | to2 ...")
         for vertex in self.edges:
             print("----------")
             for letter in self.edges[vertex]:
-                print(vertex, f"-{letter}->", " | ".join(map(repr, self.edges[vertex][letter])))
+                print(vertex, "-{}->".format(letter), " | ".join(map(repr, self.edges[vertex][letter])))
         # print("----------")
         print("********************")
 
@@ -91,15 +90,16 @@ def minimizator(pdka):
 
 def pdkator(dka):
     is_changed = False
+    dummy = VertexFrozenset({dka.vertexes_number + 1})
     for vertex in dka.edges:
         for letter in dka.alphabet:
             if dka.edges[vertex][letter] == VertexFrozenset():
                 is_changed = True
-                dka.edges[vertex][letter] = VertexFrozenset({"dummy"})
+                dka.edges[vertex][letter] = VertexFrozenset({dummy})
 
     if is_changed:
+        dka.edges[dummy] = dict([(letter, VertexFrozenset({dummy})) for letter in dka.alphabet])
         dka.vertexes_number += 1
-        dka.edges["dummy"] = dict([(letter, VertexFrozenset({"dummy"})) for letter in dka.alphabet])
 
     # dka.pretty_print()
 

@@ -54,3 +54,11 @@ To run tests:
 ```shell script
 python3 unit_tests.py
 ```
+
+## Coverage
+To get coverage
+```shell script
+coverage run -m unittest discover
+coverage html
+open htmlcov/index.html
+```
